@@ -10,7 +10,8 @@ var delay = (seconds) =>
 
 delay(1)
   .then(console.log)
-  .then(() => console.log("Hello World"));
+  .then(() => 42)
+  .then((number) => console.log(`Hello World ${number}`));
 
 // delay(1, () => {
 //   console.log("one second");
