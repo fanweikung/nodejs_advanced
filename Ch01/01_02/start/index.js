@@ -8,7 +8,9 @@ var delay = (seconds) =>
 //   setTimeout(callback, seconds * 1000);
 // }
 
-delay(1).then(console.log);
+delay(1)
+  .then(console.log)
+  .then(() => console.log("Hello World"));
 
 // delay(1, () => {
 //   console.log("one second");
