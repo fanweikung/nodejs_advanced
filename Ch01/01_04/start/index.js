@@ -1,13 +1,8 @@
 var fs = require("fs");
 var { promisify } = require("util");
 
-var writeFile = fs.writeFile(
-  "callback.txt",
-  "hello from callback writefile",
-  (err) => {
-    if (err) {
-      throw err;
-    }
-    console.log("file saved");
-  }
-);
+var writeFile = promisify(fs.writeFile);
+
+writeFile("promisify.txt", "Hello")
+  .then(() => console.log("file saved"))
+  .catch((error) => console.log(`error: ${error.messge}`));
