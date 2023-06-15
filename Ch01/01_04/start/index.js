@@ -1,3 +1,5 @@
+var { promisify } = require("util");
+
 var delay = (seconds, callback) => {
   if (seconds > 3) {
     callback(new Error(`${seconds} seconds it too long!`));
@@ -9,10 +11,8 @@ var delay = (seconds, callback) => {
   }
 };
 
-delay(2, (error, message) => {
-  if (error) {
-    console.log(error.message);
-  } else {
-    console.log(message);
-  }
-});
+// convert callback into promise
+var promiseDelay = promisify(delay);
+promiseDelay(4)
+  .then(console.log)
+  .catch((error) => console.log(`error: ${error.message}`));
