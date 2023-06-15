@@ -1,13 +1,16 @@
 var delay = (seconds) =>
   new Promise((resolves, rejects) => {
-    throw new Error("argh");
+    // reject the Promise if seconds is too long
+    if (seconds > 3) {
+      rejects(new Error(`delay is > ${seconds}`));
+    }
 
     setTimeout(() => {
       resolves("the long delay has ended");
     }, seconds * 1000);
   });
 
-delay(1)
+delay(4)
   .then(console.log)
   .then(() => 42)
   .then((number) => console.log(`Hello world: ${number}`))
