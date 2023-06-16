@@ -13,8 +13,12 @@ const doStuffSequentially = async () => {
   await delay(1);
   console.log("waiting");
   await delay(2);
-  await writeFile("file.txt", "Sample File...");
-  beep();
+  try {
+    await writeFile("file.txt", "Sample File...");
+    beep();
+  } catch (error) {
+    console.error(error);
+  }
   console.log("file.txt created");
   await delay(3);
   await unlink("file.txt");
