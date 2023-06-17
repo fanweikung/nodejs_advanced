@@ -1,4 +1,5 @@
-var logUpdate = require("log-update");
+//var logUpdate = require("log-update");
+import logUpdate from "log-update";
 var toX = () => "X";
 
 var delay = (seconds) =>
