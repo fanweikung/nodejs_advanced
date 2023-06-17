@@ -8,3 +8,11 @@ var delay = (seconds) =>
   new Promise((resolves) => {
     setTimeout(resolves, seconds * 1000);
   });
+
+Promise.all([
+  writeFile("Readme.md", "Hello World"),
+  writeFile("Readme.txt", "Hello World"),
+  writeFile("Readme.json", '{ "Hello": "World" }'),
+])
+  .then(() => readdir(__dirname))
+  .then(console.log);
