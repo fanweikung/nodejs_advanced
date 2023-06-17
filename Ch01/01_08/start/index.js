@@ -15,3 +15,13 @@ var tasks = [
   delay(3),
   delay(5),
 ];
+
+class PromiseQueue {
+  constructor(promises = [], concurrentCount = 1) {}
+
+  get runAnother() {}
+  run() {}
+}
+
+var delayQueue = new PromiseQueue(tasks, 2);
+delayQueue.run();
