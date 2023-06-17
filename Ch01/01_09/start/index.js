@@ -1,3 +1,11 @@
+//var logUpdate = require("log-update");
+import logUpdate from "log-update";
+var toX = () => "X";
+
+function toY() {
+  return "Y";
+}
+
 var delay = (seconds) =>
   new Promise((resolves) => {
     setTimeout(resolves, seconds * 1000);
@@ -24,19 +32,31 @@ class PromiseQueue {
     this.running = [];
     this.complete = [];
   }
-
   // returns a boolean whether we can run another task
   get runAnother() {
     return this.running.length < this.concurrent && this.todo.length;
   }
+  graphTasks() {
+    var { todo, running, complete } = this;
+    logUpdate(
+      `
+      todo:[${todo.map(toX)}]
+      running:[${running.map(toX)}]
+      complete:[${complete.map(toX)}]
+  `
+    );
+  }
+
   run() {
     while (this.runAnother) {
       var promise = this.todo.shift();
       promise.then(() => {
-        this.complete.push(this.running.shift);
+        this.complete.push(this.running.shift());
+        this.graphTasks();
         this.run();
       });
       this.running.push(promise);
+      this.graphTasks();
     }
   }
 }
