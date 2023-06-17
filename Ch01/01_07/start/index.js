@@ -13,6 +13,10 @@ Promise.all([
   writeFile("Readme.md", "Hello World"),
   writeFile("Readme.txt", "Hello World"),
   writeFile("Readme.json", '{ "Hello": "World" }'),
+  delay(2), // finish writeFile before unlink
+  unlink("Readme.md"),
+  unlink("Readme.txt"),
+  unlink("Readme.json"),
 ])
   .then(() => readdir(__dirname))
   .then(console.log);
