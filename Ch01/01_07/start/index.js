@@ -9,6 +9,6 @@ var delay = (seconds) =>
     setTimeout(resolves, seconds * 1000);
   });
 
-Promise.all([delay(5), delay(2), delay(3), delay(5)])
+Promise.race([delay(5), delay(2), delay(3), delay(5)])
   .then(() => readdir(__dirname))
   .then(console.log);
