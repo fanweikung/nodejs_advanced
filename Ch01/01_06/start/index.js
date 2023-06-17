@@ -24,6 +24,11 @@ const doStuffSequentially = async () => {
   await unlink("file.txt");
   beep();
   console.log("file.txt removed");
+
+  return Promise.resolve();
 };
 
-doStuffSequentially();
+doStuffSequentially()
+  .then(() => console.log("again again!!!"))
+  .then(() => doStuffSequentially())
+  .then(() => console.log("enough already..."));
