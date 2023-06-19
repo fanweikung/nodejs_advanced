@@ -16,5 +16,9 @@ readStream.on("error", (error) => {
 
 readStream.pause(); //non-flowing
 process.stdin.on("data", (chunk) => {
+  if (chunk.toString().trim() === "finished") {
+    readStream.resume();
+  }
+
   readStream.read();
 });
