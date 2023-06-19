@@ -12,17 +12,17 @@ const peaks = [
 
 class StreamFromArray extends Readable {
   constructor(array) {
-    super();
+    super({ encoding: "UTF-8" }); //set option
     this.array = array;
     this.index = 0;
   }
   _read() {
-    if (this.index <= this.array.lengh) {
+    if (this.index <= this.array.length) {
       const chunk = this.array[this.index];
       this.push(chunk);
       this.index += 1;
     } else {
-      this.push = null;
+      this.push(null);
     }
   }
 }
@@ -30,4 +30,4 @@ class StreamFromArray extends Readable {
 const peakStream = new StreamFromArray(peaks);
 
 peakStream.on("data", (chunk) => console.log(chunk));
-peakStream.on("end", () => console.log("done"));
+peakStream.on("end", () => console.log("done!"));
