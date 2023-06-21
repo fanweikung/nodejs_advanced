@@ -4,7 +4,7 @@ const { promisify } = require("util");
 const fileName = "../../powder-day.mp4";
 const fileInfo = promisify(stat);
 
-createServer(async (req, res) => {
+const respondWithVideo = async (req, res) => {
   const { size } = await fileInfo(fileName);
   const range = req.headers.range;
   if (range) {
@@ -25,4 +25,6 @@ createServer(async (req, res) => {
     });
     createReadStream(fileName).pipe(res);
   }
-}).listen(3000, () => console.log("server running - 3000"));
+};
+
+createServer().listen(3000, () => console.log("server running - 3000"));
