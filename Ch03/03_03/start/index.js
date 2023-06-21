@@ -27,4 +27,18 @@ const respondWithVideo = async (req, res) => {
   }
 };
 
-createServer().listen(3000, () => console.log("server running - 3000"));
+createServer((req, res) => {
+  if (req.url === "/video") {
+    respondWithVideo(req, res);
+  } else {
+    res.writeHead(200, {
+      "Content-Type": "text/HTML",
+    });
+    res.end(`
+    <form enctype="multipart/form-data" method="POST" action="/">
+    <input type = "file" name="upload-file" />
+    <button>Upload File</button>
+    </form>
+    `);
+  }
+}).listen(3000, () => console.log("server running - 3000"));
